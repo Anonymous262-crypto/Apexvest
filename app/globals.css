@@ -1,0 +1,387 @@
+@import "tailwindcss";
+@import "../styles/utils.css";
+
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  /* Colors */
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-success: var(--success);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-light: var(--light);
+  --color-light-foreground: var(--light-foreground);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  /* Spacing */
+  --spacing-container: 1200px;
+  --spacing-container-lg: 1536px;
+
+  /* Shadows */
+  --shadow-md: 0 4px 6px -1px var(--shadow), 0 2px 4px -2px var(--shadow);
+  --shadow-xl: 0 20px 25px -5px var(--shadow), 0 8px 10px -6px var(--shadow);
+  --shadow-2xl: 0 25px 50px -12px var(--shadow);
+  --shadow-mockup: -12px 16px 48px var(--shadow-strong);
+
+  /* Separators */
+  --line-width: 1px;
+
+  /* Animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-appear: appear 0.6s forwards ease-out;
+  --animate-appear-zoom: appear-zoom 0.6s forwards ease-out;
+
+  /* Breakpoints */
+  --breakpoint-xs: 30rem;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+  @keyframes appear {
+    0% {
+      opacity: 0;
+      transform: translateY(1rem);
+      filter: blur(0.5rem);
+    }
+    50% {
+      filter: blur(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+  @keyframes appear-zoom {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    /* Apexvest palette: electric blue, elegant gold, dark navy */
+    --brand: #2459f2; /* electric blue */
+    --brand-foreground: #5b8cff; /* lighter electric blue, used by the glow */
+    --gold: #d4af37; /* elegant gold */
+    --gold-foreground: #7a5a06; /* gold safe for text on light */
+
+    --background: #f6f8fd;
+    --foreground: #0a1230; /* deep navy */
+    --card: #ffffff;
+    --card-foreground: #0a1230;
+    --popover: #ffffff;
+    --popover-foreground: #0a1230;
+    --primary: #2459f2;
+    --primary-foreground: #ffffff;
+    --secondary: #eaeffa;
+    --secondary-foreground: #0a1230;
+    --muted: #eaeffa;
+    --muted-foreground: #55607a;
+    --accent: #e1e9fc;
+    --accent-foreground: #0a1230;
+    --destructive: #dc2626;
+    --destructive-foreground: #dc2626;
+    --success: #16a34a;
+    --border: #dde3f0;
+    --input: #dde3f0;
+    --ring: #2459f2;
+    --chart-1: #2459f2;
+    --chart-2: #d4af37;
+    --chart-3: #0a1230;
+    --chart-4: #5b8cff;
+    --chart-5: #8a6508;
+    --radius: 0.75rem;
+    --sidebar: #ffffff;
+    --sidebar-foreground: #0a1230;
+    --sidebar-primary: #2459f2;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #eaeffa;
+    --sidebar-accent-foreground: #0a1230;
+    --sidebar-border: #dde3f0;
+    --sidebar-ring: #2459f2;
+
+    --light: var(--brand);
+    --light-foreground: var(--brand-foreground);
+
+    --toast-border: var(--border);
+    --shadow: #0a123010;
+    --shadow-strong: #0a123014;
+  }
+
+  .dark {
+    --brand: #6c97ff;
+    --brand-foreground: #2f66f5;
+    --gold: #e0b94a;
+    --gold-foreground: #e6c36a;
+
+    --background: #08090d; /* near-black, like the reference */
+    --foreground: #f3f6ff;
+    --card: #0d0f16;
+    --card-foreground: #f3f6ff;
+    --popover: #0d0f16;
+    --popover-foreground: #f3f6ff;
+    --primary: #2459f2;
+    --primary-foreground: #ffffff;
+    --secondary: #141722;
+    --secondary-foreground: #f3f6ff;
+    --muted: #141722;
+    --muted-foreground: #9a9fb0;
+    --accent: #1a1e2b;
+    --accent-foreground: #f3f6ff;
+    --destructive: #7f1d1d;
+    --destructive-foreground: #f87171;
+    --success: #4ade80;
+    --border: #dce4ff; /* used at low opacity (border-border/10) like the original theme */
+    --input: #1d2130;
+    --ring: #6c97ff;
+    --chart-1: #6c97ff;
+    --chart-2: #e0b94a;
+    --chart-3: #f3f6ff;
+    --chart-4: #2459f2;
+    --chart-5: #e6c36a;
+    --sidebar: #0b0d13;
+    --sidebar-foreground: #f3f6ff;
+    --sidebar-primary: #2459f2;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #141722;
+    --sidebar-accent-foreground: #f3f6ff;
+    --sidebar-border: #1d2130;
+    --sidebar-ring: #6c97ff;
+
+    --light: var(--foreground);
+    --light-foreground: var(--foreground);
+
+    --toast-border: color-mix(in oklab, var(--border) 18%, transparent);
+    --shadow: #00000030;
+    --shadow-strong: #00000099;
+  }
+
+  * {
+    @apply border-border dark:border-border/10;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* Gold keyline used on featured elements */
+@utility gold-line {
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--gold),
+    transparent
+  );
+}
+
+/* 300ms fade-up as sections scroll in. CSS only, progressive enhancement. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: fade-up 300ms ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .animate-appear,
+  .animate-appear-zoom {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* AnimatedThemeToggler: view-transition reveal for theme changes */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+html[data-magicui-theme-vt="active"]::view-transition-group(root) {
+  animation-duration: var(--magicui-theme-toggle-vt-duration);
+}
+
+/* App-like behaviour once installed as a PWA */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+@media (display-mode: standalone) {
+  html,
+  body {
+    overscroll-behavior-y: none;
+  }
+  body {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  input,
+  textarea,
+  select,
+  [contenteditable],
+  code,
+  .font-mono {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+}
+
+/* Dark mode: keep chart grids and dividers subtle instead of bright white */
+.dark .recharts-cartesian-grid line {
+  stroke: var(--border);
+  stroke-opacity: 0.1;
+}
+.dark .recharts-cartesian-axis-line,
+.dark .recharts-cartesian-axis-tick-line {
+  stroke: var(--border);
+  stroke-opacity: 0.12;
+}
+
+/* Tables turn into stacked cards on phones. Cells carry data-label (set per page). */
+@media (max-width: 639px) {
+  table.rtable thead {
+    display: none;
+  }
+  table.rtable,
+  table.rtable tbody,
+  table.rtable tr,
+  table.rtable td {
+    display: block;
+    width: 100%;
+  }
+  table.rtable tr {
+    border: 1px solid color-mix(in oklab, var(--border) 85%, transparent);
+    border-radius: 0.75rem;
+    padding: 0.4rem 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+  .dark table.rtable tr {
+    border-color: color-mix(in oklab, var(--border) 12%, transparent);
+  }
+  table.rtable td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.45rem 0;
+    border: 0;
+    text-align: right;
+    white-space: normal;
+    word-break: break-word;
+  }
+  table.rtable td::before {
+    content: attr(data-label);
+    flex-shrink: 0;
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+    text-align: left;
+  }
+  table.rtable td[data-label=""]::before {
+    display: none;
+  }
+  table.rtable td[data-label=""] {
+    justify-content: flex-end;
+  }
+}
+
+/* Seamless marquee: the track holds two identical groups, so moving by half its width loops it. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
